@@ -15,17 +15,20 @@ class multi_variable_function:
         if variables_number != len(pows) and variables_number != len(factors - 1):
             raise Exception("The number of factors - 1, powers and variables must be the same")
 
+    def value_of_term(self, value, index):
+        return self.factors[index] * value ** self.pows[index]
+
     def value_of_function(self, values):
         if self.variables_number != len(values):
             raise Exception("You must give a value fro every variable")
         value = 0
         for i in range(len(values)):
-            value += self.factors[i] * values[i] ** self.pows[i]
+            value += self.value_of_term(values[i], i)
         value += self.factors[-1]
         return value
 
     def partial_derivative(self, value, variable_index, approx):
-        return (self.factors[variable_index] * (value + approx) ** self.pows[variable_index] - self.factors[variable_index] * (value - approx) ** self.pows[variable_index])/(2 * approx)
+        return (self.value_of_term(value + approx, variable_index) - self.value_of_term(value - approx, variable_index))/(2 * approx)
 
 
 main()
