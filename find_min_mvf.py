@@ -12,7 +12,7 @@ class multi_variable_function:
         self.variables_number = variables_number
         self.pows = pows
         self.factors = factors
-        if variables_number != len(pows) and variables_number != len(factors - 1):
+        if variables_number != len(pows) and variables_number != len(factors) - 1:
             raise Exception("The number of factors - 1, powers and variables must be the same")
 
     def value_of_term(self, value, index):
