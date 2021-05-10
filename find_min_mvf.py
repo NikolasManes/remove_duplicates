@@ -1,21 +1,22 @@
 def main():
-    size = 5
+    variables_number = 5
     pows = [3, 4, 5, 1, 4]
     factors = [1, 3, -2, 6, 1, 5]
-    mfv = multi_variable_function(size, pows, factors)
+    mfv = multi_variable_function(variables_number, pows, factors)
     print(mfv.value_of_function([1, 1, 1, 1, 1]))
+    print(mfv.partial_derivative(3, 4, 0.1))
 
-
+# Multi variable poynomial function 
 class multi_variable_function:
-    def __init__(self, size, pows, factors):
-        self.size = size
+    def __init__(self, variables_number, pows, factors):
+        self.variables_number = variables_number
         self.pows = pows
         self.factors = factors
-        if size != len(pows) and size != len(factors - 1):
-            raise Exception("The number of factors, powers and variables must be the same")
+        if variables_number != len(pows) and variables_number != len(factors - 1):
+            raise Exception("The number of factors - 1, powers and variables must be the same")
 
     def value_of_function(self, values):
-        if self.size != len(values):
+        if self.variables_number != len(values):
             raise Exception("You must give a value fro every variable")
         value = 0
         for i in range(len(values)):
@@ -23,8 +24,8 @@ class multi_variable_function:
         value += self.factors[-1]
         return value
 
-    #def partial_derivative(var_i):
-
+    def partial_derivative(self, value, variable_index, approx):
+        return (self.factors[variable_index] * (value + approx) ** self.pows[variable_index] - self.factors[variable_index] * (value - approx) ** self.pows[variable_index])/(2 * approx)
 
 
 main()
