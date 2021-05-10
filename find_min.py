@@ -1,8 +1,10 @@
 count = 0
+delta = 1
 
 
 def main():
     global count
+    global delta
     start_point = 0
     end_point = 2
     n = 64
@@ -21,7 +23,7 @@ def f_x(x):
 
 
 def df_dx(x):
-    return 9 * x ** 2 - 2
+    return (f_x(x+delta) - f_x(x-delta))/(2*delta)
 
 
 def find_min(start, end, d):
