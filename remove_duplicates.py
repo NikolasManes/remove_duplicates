@@ -11,6 +11,7 @@ for line in all_lines:
 
 uniques_file = open("uniques.txt", "w") 
 for line in unique_lines:
-    print >> uniques_file, line
+    #eprint >> uniques_file, line
+    uniques_file.write("%s\n" % line)
 
 uniques_file.close()
